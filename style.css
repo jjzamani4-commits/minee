@@ -1,6 +1,5 @@
 /* ... Keep your existing * and body styles ... */
 
-/* THE GLOWING MOON - FORCED VISIBILITY */
 #moon {
     position: absolute;
     top: 60px;
@@ -10,10 +9,10 @@
     background: radial-gradient(circle, #fff8dc, #d4af37);
     border-radius: 50%;
     box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 215, 0, 0.4);
-    z-index: 10; /* High z-index to stay on all pages */
+    z-index: 10; /* This ensures it stays visible on all pages */
 }
 
-/* SCROLLABLE COMPLIMENTS */
+/* SCROLLABLE COMPLIMENTS AREA */
 #compliments {
     position: relative;
     z-index: 3;
@@ -21,19 +20,19 @@
     max-width: 800px;
     margin: 150px auto 20px auto;
     text-align: center;
-    max-height: 40vh; /* Scrollable height */
+    max-height: 40vh; 
     overflow-y: auto;
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none; 
 }
 #compliments::-webkit-scrollbar { display: none; }
 
-/* THE GOLD OUTLINE LETTER BOX */
+/* AESTHETIC GOLD OUTLINE LETTER BOX */
 #letterBox { 
     width: 85%; 
     max-width: 600px; 
-    background: rgba(0,0,0,0.5); /* Transparent */
-    backdrop-filter: blur(10px); /* Aesthetic Blur */
-    border: 2px solid gold; /* Bold Gold Outline */
+    background: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(10px); 
+    border: 2px solid gold; /* The gold outline you requested */
     padding: 30px; 
     border-radius: 15px; 
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
@@ -44,11 +43,11 @@
     font-size: 1.1rem; 
     line-height: 1.6; 
     color: #fff8dc; 
-    max-height: 50vh; /* Scrollable */
-    overflow-y: auto;
+    max-height: 50vh; 
+    overflow-y: auto; /* Makes the letter scrollable */
 }
 
-/* AESTHETIC SPARKLES */
+/* FINAL GLOWING SPARKLES */
 .sparkle-final {
     position: fixed;
     width: 4px;
@@ -66,5 +65,3 @@
     50% { opacity: 1; transform: scale(1.2); }
     100% { transform: scale(0); opacity: 0; }
 }
-
-/* ... Keep your existing star and fall animations ... */
