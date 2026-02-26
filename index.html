@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamp Love</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="lamp" title="Toggle light">💡</div>
+    <div id="sky" class="hidden">
+        <!-- stars are generated in CSS; include moon element -->
+        <div id="moon" class="hidden"></div>
+        <h1>Welcome to Lamp Love!</h1>
+        <p>Click the lamp to toggle between day and night.</p>
+    </div>
+
+    <div id="login" class="hidden">
+        <h1>Welcome to Lamp Love!</h1>
+
+        <div class="login-row">
+            <input type="text" id="username" placeholder="Username">
+        </div>
+        <div class="login-row">
+            <input type="password" id="password" placeholder="Password">
+        </div>
+        <div class="login-row">
+            <button id="loginButton" type="button">Login</button>
+        </div>
+    </div>
+
+    <!-- Main page: big faint heart + compliments -->
+    <main id="main" class="hidden">
+        <div id="big-heart">❤</div>
+        <div id="compliments"></div>
+        <div id="continueWrap" class="hidden">
+            <button id="continueBtn" type="button">Continue</button>
+        </div>
+    </main>
+
+    <!-- Letter page: final romantic letter that types itself -->
+    <section id="letter" class="hidden">
+        <div id="letterBox">
+            <div id="letterContent" class="reveal"></div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
