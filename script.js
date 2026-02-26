@@ -193,14 +193,38 @@ const letterText = `Hey mama,\n\nEvery time I think of you, my heart hums the sw
 function startTypingLetter() {
     letterContent.textContent = '';
     let i = 0;
-    const speed = 60; // ms per character
+    const speed = 40; 
     const timer = setInterval(() => {
         letterContent.textContent += letterText.charAt(i);
         i++;
         if (i >= letterText.length) {
             clearInterval(timer);
+            // TRIGGER THE SPARKLES HERE!
+            createSparkles(100); 
         }
     }, speed);
+}
+
+// The sparkle function
+function createSparkles(count) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            
+            // Random position on the screen
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            
+            document.body.appendChild(sparkle);
+            
+            // Remove from screen after animation finishes
+            setTimeout(() => sparkle.remove(), 1500);
+        }, i * 20); // This makes them "pop" one by one quickly
+    }
 }
 
 // Initialize: keep everything hidden until lamp is toggled on
@@ -210,6 +234,7 @@ moon.classList.add('hidden');
 main.classList.add('hidden');
 letterSection.classList.add('hidden');
 setLamp(false);
+
 
 
 
