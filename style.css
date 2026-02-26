@@ -58,15 +58,17 @@ body {
 
 .hidden { display: none !important; }
 
+/* MOON IS BACK */
 #moon {
     position: absolute;
-    top: 50px;
-    left: 40px;
-    width: 80px;
-    height: 80px;
+    top: 80px;
+    left: 100px;
+    width: 120px;
+    height: 120px;
     background: radial-gradient(circle, #fff8dc, #d4af37);
     border-radius: 50%;
     box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+    z-index: 2;
 }
 
 #compliments {
@@ -74,7 +76,7 @@ body {
     z-index: 3;
     width: 90%;
     max-width: 500px;
-    margin: 80px auto 10px auto;
+    margin: 150px auto 10px auto;
     text-align: center;
     max-height: 45vh;
     overflow-y: auto;
@@ -87,10 +89,10 @@ body {
     animation: fadeIn 0.8s ease forwards;
 }
 
-#continueWrap { text-align: center; margin-top: 20px; }
+#continueWrap { text-align: center; margin-top: 20px; position: relative; z-index: 10; }
 #continueBtn { padding: 12px 30px; border: 1px solid gold; background: transparent; color: gold; border-radius: 6px; cursor: pointer; }
 
-/* THE TRANSPARENT LETTER AREA */
+/* TRANSPARENT LETTER BOX WITH GOLD OUTLINE */
 #letter {
     position: fixed;
     inset: 0;
@@ -98,19 +100,17 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 100;
-    /* REMOVED background-color: black so stars show through */
 }
 
 #letterBox {
     width: 90%;
     max-width: 500px;
-    /* This makes it transparent but adds a slight glass blur */
-    background: rgba(0, 0, 0, 0.3); 
-    backdrop-filter: blur(8px); 
-    border: 2px solid gold; /* The gold outline you want */
+    background: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(10px); 
+    border: 2px solid gold; 
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
 }
 
 #letterContent {
@@ -118,8 +118,6 @@ body {
     font-size: 1rem;
     line-height: 1.5;
     color: #fff8dc;
-    max-height: 60vh;
-    overflow-y: auto;
 }
 
 .star { position: absolute; width: 2px; height: 2px; background: gold; border-radius: 50%; z-index: 1; }
