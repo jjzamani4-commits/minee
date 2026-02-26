@@ -19,7 +19,6 @@ body {
     font-size: 40px;
     cursor: pointer;
     z-index: 1000;
-    user-select: none;
 }
 
 #login {
@@ -34,12 +33,8 @@ body {
     box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
     text-align: center;
     color: gold;
-    width: 90%;
-    max-width: 320px;
-    pointer-events: auto;
+    width: 320px;
 }
-
-#login .login-row { margin: 10px 0; }
 
 #login input {
     display: block;
@@ -49,31 +44,19 @@ body {
     border: 1px solid gold;
     color: gold;
     border-radius: 6px;
-    font-size: 16px;
+    margin: 10px 0;
 }
 
 #login button {
-    margin-top: 15px;
     padding: 10px 20px;
     background: transparent;
     border: 1px solid gold;
     color: gold;
     cursor: pointer;
     border-radius: 6px;
-    width: 100%;
 }
 
-.hidden {
-    display: none !important;
-}
-
-#sky h1, #sky p {
-    color: gold;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-    margin-top: 20px;
-}
+.hidden { display: none !important; }
 
 #moon {
     position: absolute;
@@ -86,25 +69,6 @@ body {
     box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
 }
 
-/* Lamp Glow */
-#lamp.on {
-    color: gold;
-    text-shadow: 0 0 10px gold, 0 0 20px gold;
-}
-
-/* Big faint heart background */
-#big-heart {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 40vw;
-    color: rgba(255, 215, 0, 0.06);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Compliments Area - Scrollable */
 #compliments {
     position: relative;
     z-index: 3;
@@ -114,64 +78,54 @@ body {
     text-align: center;
     max-height: 45vh;
     overflow-y: auto;
-    padding: 10px;
-    scrollbar-width: none; /* Hide scrollbar for cleaner look */
 }
-
-#compliments::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
 
 .compliment {
     margin: 20px 0;
     font-size: 1.2rem;
     color: #fff8dc;
-    line-height: 1.5;
     animation: fadeIn 0.8s ease forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+#continueWrap { text-align: center; margin-top: 20px; }
+#continueBtn { padding: 12px 30px; border: 1px solid gold; background: transparent; color: gold; border-radius: 6px; cursor: pointer; }
 
-#continueWrap { text-align: center; margin-top: 20px; z-index: 10; position: relative; }
-#continueBtn { padding: 12px 30px; border-radius: 6px; border: 1px solid gold; background: transparent; color: gold; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; }
-
-/* Letter Section Fixed */
+/* TRANSPARENT LETTER BOX WITH GOLD OUTLINE */
 #letter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 600px;
-    z-index: 20;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
 }
 
 #letterBox {
-    background: rgba(0, 0, 0, 0.6);
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 215, 0, 0.05); /* Very light gold tint */
+    backdrop-filter: blur(5px); /* Blurs background stars slightly */
+    border: 2px solid gold; /* The gold outline */
     padding: 25px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    /* REMOVED opacity: 0 - This makes it visible again! */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
-#letterContent { 
-    white-space: pre-wrap; 
-    font-size: 0.95rem;
-    line-height: 1.6;
+#letterContent {
+    white-space: pre-wrap;
+    font-size: 1rem;
+    line-height: 1.5;
     color: #fff8dc;
     max-height: 60vh;
     overflow-y: auto;
 }
 
-/* Sparkles & Stars */
-.star { position: absolute; width: 2px; height: 2px; background: gold; border-radius: 50%; z-index: 1; pointer-events: none; }
+.star { position: absolute; width: 2px; height: 2px; background: gold; border-radius: 50%; z-index: 1; }
 
 @keyframes fall {
-    0% { transform: translateY(-10vh) scale(0.6); opacity: 0; }
+    0% { transform: translateY(-10vh); opacity: 0; }
     10% { opacity: 1; }
-    100% { transform: translateY(110vh) scale(1); opacity: 0; }
+    100% { transform: translateY(110vh); opacity: 0; }
 }
 
 .sparkle {
@@ -181,19 +135,11 @@ body {
     background: gold;
     border-radius: 50%;
     z-index: 9999;
-    box-shadow: 0 0 10px gold, 0 0 20px white;
     animation: sparkleAnim 1.5s ease-out forwards;
 }
 
 @keyframes sparkleAnim {
     0% { transform: scale(0); opacity: 0; }
-    50% { opacity: 1; transform: scale(1.5); }
+    50% { opacity: 1; transform: scale(1.2); }
     100% { transform: scale(0); opacity: 0; }
-}
-
-/* Mobile Tweaks */
-@media (max-width: 480px) {
-    #moon { width: 60px; height: 60px; left: 20px; top: 20px; }
-    .compliment { font-size: 1.1rem; }
-    #letterContent { font-size: 0.85rem; line-height: 1.4; }
 }
