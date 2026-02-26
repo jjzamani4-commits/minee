@@ -83,7 +83,36 @@ function setLamp(on) {
 }
 
 lamp.addEventListener('click', () => {
-    setLamp(!is0n);
+    is0n = !is0n;
+    
+    if (is0n) {
+        // Turning lamp ON
+        lamp.textContent = '💡'; 
+        document.body.classList.add('lit');
+        document.body.style.background = "radial-gradient(circle at 80% 20%, #222, #000)";
+        
+        // --- NEW LOGIC START ---
+        // If the user has reached the letter page, start the typing now!
+        if (!letterSection.classList.contains('hidden')) {
+            startTypingLetter();
+        }
+        // --- NEW LOGIC END ---
+
+        if (!loggedIn) {
+            login.classList.remove('hidden');
+        } else {
+            sky.classList.remove('hidden');
+            moon.classList.remove('hidden');
+        }
+    } else {
+        // Turning lamp OFF
+        lamp.textContent = '🌑'; 
+        document.body.classList.remove('lit');
+        document.body.style.background = "black";
+        sky.classList.add('hidden');
+        moon.classList.add('hidden');
+        login.classList.add('hidden');
+    }
 });
 
 // Credentials
@@ -184,7 +213,13 @@ function playComplimentSound() {
 continueBtn.addEventListener('click', () => {
     main.classList.add('hidden');
     letterSection.classList.remove('hidden');
-    // Don't start typing yet - wait for lamp toggle
+    
+    // Reset the lamp state to OFF when moving to the letter
+    // This ensures the screen is black even if the lamp was on during compliments
+    is0n = false;
+    document.body.classList.remove('lit');
+    document.body.style.background = "black";
+    lamp.textContent = '💡'; // Set icon to unlit
 });
 
 // Typing effect for the love letter
@@ -234,6 +269,7 @@ moon.classList.add('hidden');
 main.classList.add('hidden');
 letterSection.classList.add('hidden');
 setLamp(false);
+
 
 
 
