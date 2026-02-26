@@ -18,7 +18,7 @@ let complimentsInterval = null;
 
 // Create raining stars
 function createStars(count = 80) {
-    sky.innerHTML = ''; // Clear existing stars
+    sky.innerHTML = ''; 
     for (let i = 0; i < count; i++) {
         const s = document.createElement('div');
         s.className = 'star';
@@ -29,21 +29,28 @@ function createStars(count = 80) {
     }
 }
 
-// Lamp Toggle Logic - Controls the Glowing Moon and Sky
+// LAMP TOGGLE: This controls the Moon, Stars, and Background Glow
 lamp.addEventListener('click', () => {
     is0n = !is0n;
+    
     if (is0n) {
         lamp.textContent = '💡';
         document.body.classList.add('lit');
         document.body.style.background = "radial-gradient(circle at 80% 20%, #222, #000)";
         
+        // SHOW THE MOON AND STARS IMMEDIATELY ON TOGGLE
+        sky.classList.remove('hidden'); 
+        moon.classList.remove('hidden'); 
+        createStars(80);
+
+        // Only show login if they haven't logged in yet
         if (!loggedIn) {
             login.classList.remove('hidden');
-        } else {
-            sky.classList.remove('hidden'); 
-            moon.classList.remove('hidden'); 
+        } else if (letterSection.classList.contains('hidden')) {
+            main.classList.remove('hidden');
         }
     } else {
+        // HIDE EVERYTHING ON OFF
         lamp.textContent = '🌑';
         document.body.classList.remove('lit');
         document.body.style.background = "black";
@@ -51,10 +58,11 @@ lamp.addEventListener('click', () => {
         sky.classList.add('hidden');
         moon.classList.add('hidden');
         login.classList.add('hidden');
+        main.classList.add('hidden');
     }
 });
 
-// Login Logic
+// LOGIN LOGIC
 loginButton.addEventListener('click', () => {
     const user = (usernameInput.value || '').trim();
     const pass = (passwordInput.value || '').trim();
@@ -63,12 +71,8 @@ loginButton.addEventListener('click', () => {
         loggedIn = true;
         login.classList.add('hidden');
         main.classList.remove('hidden');
-        sky.classList.remove('hidden');
-        moon.classList.remove('hidden');
-        createStars(80);
         startCompliments();
     } else {
-        // Shake animation for error
         login.animate([
             { transform: 'translate(-50%, -50%)' },
             { transform: 'translate(-48%, -50%)' },
@@ -78,7 +82,6 @@ loginButton.addEventListener('click', () => {
     }
 });
 
-// Compliments List
 const complimentsList = [
     "Hey babe, I want to use this opportunity to tell you that you light up my world ✨.",
     "🌅 Your smile is my favorite sunrise.",
@@ -90,7 +93,6 @@ const complimentsList = [
     "💕 Loving you is the easiest thing I do."
 ];
 
-// Show compliments in order
 function startCompliments() {
     complimentsWrap.innerHTML = '';
     continueWrap.classList.add('hidden');
@@ -102,12 +104,7 @@ function startCompliments() {
             el.className = 'compliment';
             el.textContent = complimentsList[currentIndex++];
             complimentsWrap.appendChild(el);
-            
-            // Auto-scroll the compliments box
-            complimentsWrap.scrollTo({ 
-                top: complimentsWrap.scrollHeight, 
-                behavior: 'smooth' 
-            });
+            complimentsWrap.scrollTo({ top: complimentsWrap.scrollHeight, behavior: 'smooth' });
         } else {
             clearInterval(complimentsInterval);
             complimentsInterval = null;
@@ -119,31 +116,26 @@ function startCompliments() {
     complimentsInterval = setInterval(showNext, 2500);
 }
 
-// Continue Button - Transitions to the Letter
 continueBtn.addEventListener('click', () => {
     main.classList.add('hidden');
     letterSection.classList.remove('hidden');
     startTypingLetter();
 });
 
-// Letter Content
 const letterText = `Hey mama,\n\nEvery time I think of you, my heart hums the sweetest tune. You're my morning light and my midnight star 💫.\n\nIn the quiet when the world slows down and everything fades into silence, you are the thought that stays\n\nI didn't plan to feel this way untill you arrived gently and somehow became everything\n\nYour smile feels like light after a long night,\n\nEven your on days when words fail me, my heart still speaks your namen\n\nIf love is patience, I'm learning it with you\n\nIf love is kindness, I see it in you and\n\nIf love is home... then that's where you are.\n\nNo matter where life takes us,\n\nKnow this, I choose you, in both calm and stormy days.\n\nForever yours,\nYour adoring partner ❤️😘`;
 
-// Typewriter Effect
 function startTypingLetter() {
     letterContent.textContent = '';
     let i = 0;
-    const speed = 40; 
     const timer = setInterval(() => {
         letterContent.textContent += letterText.charAt(i++);
         if (i >= letterText.length) {
             clearInterval(timer);
             createSparkles(100); 
         }
-    }, speed);
+    }, 40);
 }
 
-// Sparkle Finale
 function createSparkles(count) {
     for (let i = 0; i < count; i++) {
         setTimeout(() => {
@@ -157,5 +149,5 @@ function createSparkles(count) {
     }
 }
 
-// Initialize
+// Initial State
 [login, sky, moon, main, letterSection].forEach(el => el.classList.add('hidden'));
