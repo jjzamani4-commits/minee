@@ -136,8 +136,11 @@ function startCompliments(durationSeconds = 20) {
     let elapsed = 0;
     const intervalMs = 2500;
     
-    // show the first (special) compliment immediately
-    const firstText = complimentsList[0];
+    // Create a copy of the list to "exhaust" so we don't repeat
+    let availableCompliments = [...complimentsList]; 
+    
+    // Show the first one immediately
+    const firstText = availableCompliments.shift(); // Takes the first one out
     const firstEl = document.createElement('div');
     firstEl.className = 'compliment reveal';
     firstEl.textContent = firstText;
@@ -145,14 +148,21 @@ function startCompliments(durationSeconds = 20) {
     complimentScroll();
     
     complimentsInterval = setInterval(() => {
-        const text = complimentsList[Math.floor(Math.random() * complimentsList.length)];
+        if (availableCompliments.length === 0) {
+            // Option: Reset the list if you want it to keep going forever without repeats
+            availableCompliments = [...complimentsList].sort(() => Math.random() - 0.5);
+        }
+
+        // Pick the next one in the shuffled list
+        const text = availableCompliments.shift(); 
         const el = document.createElement('div');
         el.className = 'compliment reveal';
         el.textContent = text;
         complimentsWrap.appendChild(el);
-        // auto-scroll to bottom
+        
         complimentScroll();
         elapsed += intervalMs / 1000;
+
         if (elapsed >= durationSeconds) {
             clearInterval(complimentsInterval);
             complimentsInterval = null;
@@ -200,4 +210,5 @@ moon.classList.add('hidden');
 main.classList.add('hidden');
 letterSection.classList.add('hidden');
 setLamp(false);
+
 
