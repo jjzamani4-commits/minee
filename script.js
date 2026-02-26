@@ -66,7 +66,7 @@ function setLamp(on) {
         }
     } else {
         // Turning lamp OFF
-        sky.classList.add('hidden');
+        // sky.classList.add('hidden');  <-- Comment this out with //
         login.classList.add('hidden');
         document.body.style.background = "black";
         
@@ -200,3 +200,4 @@ moon.classList.add('hidden');
 main.classList.add('hidden');
 letterSection.classList.add('hidden');
 setLamp(false);
+
