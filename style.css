@@ -76,11 +76,12 @@ body {
     display: none;
 }
 
-#sky {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
+#sky h1, #sky p {
+    color: gold;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    margin-top: 20px;
 }
 
 #sky::before {
@@ -171,4 +172,5 @@ body.lit .reveal {
     0% { transform: translateY(-10vh) translateX(0) scale(0.6); opacity: 0; }
     10% { opacity: 1; }
     100% { transform: translateY(120vh) translateX(30px) scale(1); opacity: 0; }
+
 }
