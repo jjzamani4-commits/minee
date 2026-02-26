@@ -16,28 +16,29 @@ let is0n = false;
 let loggedIn = false;
 let complimentsInterval = null;
 
-// Generate the Aesthetic Background
 function createAtmosphere() {
     sky.innerHTML = '';
-    // Create raining stars
-    for (let i = 0; i < 100; i++) {
+    // Increase star count for better visibility
+    for (let i = 0; i < 150; i++) {
         const s = document.createElement('div');
         s.className = 'star';
-        const size = Math.random() * 3 + 'px';
+        const size = (1 + Math.random() * 3) + 'px';
         s.style.width = size;
         s.style.height = size;
         s.style.left = Math.random() * 100 + 'vw';
         s.style.top = -10 + 'vh';
-        s.style.backgroundColor = i % 2 === 0 ? "gold" : "white";
-        s.style.animation = `fall ${5 + Math.random() * 5}s linear ${Math.random() * -10}s infinite`;
+        s.style.animation = `fall ${4 + Math.random() * 6}s linear ${Math.random() * -10}s infinite`;
         sky.appendChild(s);
     }
-    // Create twinkling background sparkles
-    for (let j = 0; j < 50; j++) {
+    // Increase sparkling background particles
+    for (let j = 0; j < 80; j++) {
         const sp = document.createElement('div');
         sp.className = 'sparkle-bg';
+        sp.style.width = '3px';
+        sp.style.height = '3px';
         sp.style.left = Math.random() * 100 + 'vw';
         sp.style.top = Math.random() * 100 + 'vh';
+        sp.style.animation = `twinkle ${2 + Math.random() * 3}s infinite ease-in-out`;
         sp.style.animationDelay = Math.random() * 5 + 's';
         sky.appendChild(sp);
     }
@@ -50,14 +51,16 @@ function setLamp(on) {
     
     if (is0n) {
         sky.classList.remove('hidden');
-        moon.classList.remove('hidden');
+        moon.classList.remove('hidden'); // Moon stays visible
         createAtmosphere();
         document.body.style.background = "radial-gradient(circle at 80% 20%, #1a1a1a, #000)";
         
         if (!loggedIn) {
             login.classList.remove('hidden');
-        } else if (!main.classList.contains('hidden') && !complimentsInterval) {
+        } else if (!main.classList.contains('hidden')) {
             startCompliments();
+        } else if (!letterSection.classList.contains('hidden')) {
+            // Ensure sky/moon stay if we are on the letter page
         }
     } else {
         [sky, moon, login, main, letterSection].forEach(el => el.classList.add('hidden'));
@@ -75,23 +78,22 @@ loginButton.addEventListener('click', () => {
         main.classList.remove('hidden');
         startCompliments();
     } else {
-        login.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'translateX(0)'}], {duration:200, iterations:2});
+        login.animate([{transform:'translateX(-10px)'},{transform:'translateX(10px)'}], {duration:100, iterations:3});
     }
 });
 
-const complimentsList = [
-    "Hey babe, I want to use this opportunity to tell you that you light up my world ✨.",
-    "🌅 Your smile is my favorite sunrise.",
-    "💝 I'm grateful for your gentle heart.",
-    "🌟 You make ordinary days extraordinary.",
-    "😍 I adore everything about you.",
-    "💫 Your eyes hold endless stars.",
-    "🌙 You are my sweetest dream.",
-    "💕 Loving you is the easiest thing I do."
-];
-
 function startCompliments() {
     complimentsWrap.innerHTML = '';
+    const complimentsList = [
+        "Hey babe, I want to use this opportunity to tell you that you light up my world ✨.",
+        "🌅 Your smile is my favorite sunrise.",
+        "💝 I'm grateful for your gentle heart.",
+        "🌟 You make ordinary days extraordinary.",
+        "😍 I adore everything about you.",
+        "💫 Your eyes hold endless stars.",
+        "🌙 You are my sweetest dream.",
+        "💕 Loving you is the easiest thing I do."
+    ];
     let currentIndex = 0;
     const showNext = () => {
         if (currentIndex < complimentsList.length) {
@@ -122,10 +124,10 @@ function startTypingLetter() {
     let i = 0;
     const timer = setInterval(() => {
         letterContent.textContent += letterText.charAt(i++);
-        letterContent.scrollTo({ top: letterContent.scrollHeight });
+        letterContent.scrollTo({ top: letterContent.scrollHeight, behavior: 'smooth' });
         if (i >= letterText.length) {
             clearInterval(timer);
-            createEndSparkles(100); 
+            createEndSparkles(150); // Massive sparkle finish
         }
     }, 50);
 }
@@ -134,16 +136,16 @@ function createEndSparkles(count) {
     for (let i = 0; i < count; i++) {
         setTimeout(() => {
             const s = document.createElement('div');
-            s.className = 'sparkle-bg'; // Using the twinkling style
+            s.className = 'sparkle-bg';
             s.style.position = 'fixed';
             s.style.left = Math.random() * 100 + 'vw';
             s.style.top = Math.random() * 100 + 'vh';
             s.style.zIndex = '1000';
-            s.style.width = '4px';
-            s.style.height = '4px';
+            s.style.width = '5px';
+            s.style.height = '5px';
             document.body.appendChild(s);
-            setTimeout(() => s.remove(), 2000);
-        }, i * 30);
+            setTimeout(() => s.remove(), 2500);
+        }, i * 25);
     }
 }
 
