@@ -136,33 +136,25 @@ function startCompliments(durationSeconds = 20) {
     let elapsed = 0;
     const intervalMs = 2500;
     
-    // Create a copy of the list to "exhaust" so we don't repeat
-    let availableCompliments = [...complimentsList]; 
+    // This shuffles the list so it never repeats until the end
+    let shuffledList = [...complimentsList].sort(() => Math.random() - 0.5);
     
-    // Show the first one immediately
-    const firstText = availableCompliments.shift(); // Takes the first one out
-    const firstEl = document.createElement('div');
-    firstEl.className = 'compliment reveal';
-    firstEl.textContent = firstText;
-    complimentsWrap.appendChild(firstEl);
-    complimentScroll();
+    const showNext = () => {
+        if (shuffledList.length > 0) {
+            const text = shuffledList.shift(); 
+            const el = document.createElement('div');
+            el.className = 'compliment reveal';
+            el.textContent = text;
+            complimentsWrap.appendChild(el);
+            complimentScroll();
+        }
+    };
+
+    showNext();
     
     complimentsInterval = setInterval(() => {
-        if (availableCompliments.length === 0) {
-            // Option: Reset the list if you want it to keep going forever without repeats
-            availableCompliments = [...complimentsList].sort(() => Math.random() - 0.5);
-        }
-
-        // Pick the next one in the shuffled list
-        const text = availableCompliments.shift(); 
-        const el = document.createElement('div');
-        el.className = 'compliment reveal';
-        el.textContent = text;
-        complimentsWrap.appendChild(el);
-        
-        complimentScroll();
+        showNext();
         elapsed += intervalMs / 1000;
-
         if (elapsed >= durationSeconds) {
             clearInterval(complimentsInterval);
             complimentsInterval = null;
@@ -210,5 +202,6 @@ moon.classList.add('hidden');
 main.classList.add('hidden');
 letterSection.classList.add('hidden');
 setLamp(false);
+
 
 
