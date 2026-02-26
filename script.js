@@ -171,8 +171,11 @@ function startCompliments(durationSeconds = 20) {
 }
 
 function complimentScroll() {
-    // keep newest visible
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    // This now scrolls the specific box instead of the whole page
+    complimentsWrap.scrollTo({ 
+        top: complimentsWrap.scrollHeight, 
+        behavior: 'smooth' 
+    });
 }
 
 // Audio removed - compliments display silently now
@@ -209,6 +212,7 @@ moon.classList.add('hidden');
 main.classList.add('hidden');
 letterSection.classList.add('hidden');
 setLamp(false);
+
 
 
 
