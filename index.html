@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lamp Love</title>
+    <title>Lamp of Love</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="lamp" title="Toggle light">💡</div>
-        <div id="sky">
-        <div id="moon" class="hidden"></div>
-        <h1>Welcome my Love!</h1>
-        <p>Click the lamp to reveal texts.</p>
-    </div>
+
+    <div id="moon" class="hidden"></div>
+
+    <div id="sky" class="hidden"></div>
 
     <div id="login" class="hidden">
-        <h1>Welcome my Love!</h1>
-
+        <h1 class="reveal">Welcome my Love!</h1>
         <div class="login-row">
             <input type="text" id="username" placeholder="Username">
         </div>
@@ -28,7 +26,6 @@
         </div>
     </div>
 
-    <!-- Main page: big faint heart + compliments -->
     <main id="main" class="hidden">
         <div id="big-heart">❤</div>
         <div id="compliments"></div>
@@ -37,7 +34,6 @@
         </div>
     </main>
 
-    <!-- Letter page: final romantic letter that types itself -->
     <section id="letter" class="hidden">
         <div id="letterBox">
             <div id="letterContent" class="reveal"></div>
@@ -46,6 +42,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
-
