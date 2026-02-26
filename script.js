@@ -16,7 +16,7 @@ let is0n = false;
 let loggedIn = false;
 let complimentsInterval = null;
 
-function createStars(count = 60) {
+function createStars(count = 80) {
     for (let i = 0; i < count; i++) {
         const s = document.createElement('div');
         s.className = 'star';
